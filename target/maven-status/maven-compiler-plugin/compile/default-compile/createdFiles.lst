@@ -1,0 +1,4 @@
+com\student\enquiry\admin\service\impl\StudentServiceImpl.class
+com\student\enquiry\admin\StudentEnquiryManagementApplication.class
+com\student\enquiry\admin\service\StudentService.class
+com\student\enquiry\admin\repository\UserRepository.class
