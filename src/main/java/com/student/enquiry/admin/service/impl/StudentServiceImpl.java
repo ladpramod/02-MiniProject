@@ -24,7 +24,22 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public String signUp(SignUpForm form) {
-		// TODO Auto-generated method stub
+		
+		
+		// TODO: generate random password and set to object
+		
+		//TODO: Set account status as locked
+		
+		//TODO: Insert Record
+		
+		//TODO: Send Email to the unlocked account
+		
+		
+		
+		
+		
+		
+		
 		return null;
 	}
 
