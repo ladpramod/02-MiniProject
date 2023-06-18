@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xml:lang="en" xmlns:th="www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>signup</title>
@@ -75,25 +75,27 @@
 										<h4 class="mt-1 mb-5 pb-1"></h4>
 									</div>
 
-									<form>
+									<p th:text="${succMsg}" class="text-success">
+									<p th:text="${errMsg}" class="text-danger">
+									<form th:action="@{/signup}" th:object="${user}" method="POST">
 										<p>Please create account here</p>
 
 										<div class="form-outline mb-4">
 										<label class="form-label" for="form2Example11">Name</label>
-											<input type="email" id="form2Example11" class="form-control"
-												placeholder="Enter your name" /> 
+											<input type="text" id="form2Example11" class="form-control"
+												placeholder="name" th:field="*{name}" />
 										</div>
 
 										<div class="form-outline mb-4">
 										<label class="form-label" for="form2Example22">Email</label>
-											<input type="password" id="form2Example22"
-												class="form-control" placeholder="Enter your Email"/> 
+											<input type="email" id="form2Example22"
+												class="form-control" placeholder="Email" th:field="*{email}"/>
 										</div>
 
 										<div class="form-outline mb-4">
-										<label class="form-label" for="form2Example22">Phno</label>
-											<input type="password" id="form2Example22"
-												class="form-control" placeholder="Enter your phone number"/> 
+										<label class="form-label" for="form2Example33">Phno</label>
+											<input type="text" id="form2Example33"
+												class="form-control" placeholder="Phone Number"th:field="*{phone}/>
 										</div>
 
 										<div class="text-center pt-1 mb-5 pb-1">

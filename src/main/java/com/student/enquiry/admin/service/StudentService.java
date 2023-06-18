@@ -9,7 +9,7 @@ public interface StudentService {
 	
 	public String login(LoginForm form);
 	
-	public String signUp(SignUpForm form);
+	public boolean signUp(SignUpForm form);
 	
 	public String unlockAccount(UnlockForm form);
 	
