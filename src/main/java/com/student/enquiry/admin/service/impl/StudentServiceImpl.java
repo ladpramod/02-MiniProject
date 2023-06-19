@@ -40,7 +40,7 @@ public class StudentServiceImpl implements StudentService{
 			 return false;
 		 }
 		
-		//TODO: Copy data from binding obj to entity obj
+		//Copy data from binding obj to entity obj
 		UserDetailsEntity entity = new UserDetailsEntity();
 		BeanUtils.copyProperties(form,entity);
 
@@ -50,13 +50,13 @@ public class StudentServiceImpl implements StudentService{
 		String tempPwd = PwdUtils.generateRandomPwd();
 		entity.setPassword(tempPwd);
 
-		//TODO: Set account status as locked
+		//Set account status as locked
 		entity.setActiveStatus("LOCKED");
 		
-		//TODO: Insert Record
+		//Insert Record
 		repository.save(entity);
 		
-		//TODO: Send Email to the unlocked account
+		//Send Email to the unlocked account
 		String to = form.getEmail();
 		String subject = "Please unlock your account |Ashok-IT";
 		StringBuffer body = new StringBuffer("");
@@ -74,17 +74,27 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	@Override
-	public String unlockAccount(UnlockForm form) {
-		//TODO: Unlock account from entered temp password and create new password
-		//and change status as Activate.
-		
-		UserDetailsEntity entity = new UserDetailsEntity();
-		BeanUtils.copyProperties(form,entity);
-		
-		
-		entity.setActiveStatus("UNLOCKED");
-		
-		return null;
+	public boolean unlockAccount(UnlockForm form) {
+
+		//Checking the data is the database whether received email is available or not
+
+		UserDetailsEntity entity = repository.findByEmail(form.getEmail());
+
+		//Validated the entity password and form password matching or not
+		if (entity.getPassword().equals(form.getTempPwd())){
+
+			//if valid password then update new password in the database
+			entity.setPassword(form.getNewPwd());
+
+			//Change the account status as Unlocked and save into database and return true
+			entity.setActiveStatus("UNLOCKED");
+			repository.save(entity);
+			return true;
+		}else{
+			//if password not matching then return false
+			return false;
+		}
+
 	}
 
 	@Override

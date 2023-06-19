@@ -50,12 +50,29 @@ public class UserController {
 	}
 	
 	@PostMapping("/unlock")
-	public String unlockUserAccount(@ModelAttribute UnlockForm unlock, Model model) {
+	public String unlockUserAccount(@ModelAttribute("unlock)") UnlockForm unlock, Model model) {
 		
-//		String unlockAccount = studentService.unlockAccount(form);
-//		model.addAttribute("email",unlockAccount);
-		
-		System.out.println("unlock");
+
+
+
+		//validate user entered password and current password should same
+		if (unlock.getNewPwd().equals(unlock.getConfPwd())){
+
+			//if valid then unlock the account
+			boolean status = studentService.unlockAccount(unlock);
+
+			if (status){
+				model.addAttribute("succMsg", "Your account unlocked successfully..");
+			}else {
+
+				model.addAttribute("errMsg","Given temporary password is incorrect, check email once..");
+			}
+		}else {
+
+			//if not valid then send error msg as response to the client
+			model.addAttribute("errMsg", "New Password and Confirm password must be same");
+		}
+
 		return "unlock";
 	}
 	

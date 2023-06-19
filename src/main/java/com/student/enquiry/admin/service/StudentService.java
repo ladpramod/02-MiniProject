@@ -11,7 +11,7 @@ public interface StudentService {
 	
 	public boolean signUp(SignUpForm form);
 	
-	public String unlockAccount(UnlockForm form);
+	public boolean unlockAccount(UnlockForm form);
 	
 	public String forgotPwd(String email);
 }
