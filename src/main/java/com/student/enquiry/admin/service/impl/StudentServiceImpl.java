@@ -31,6 +31,15 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public boolean signUp(SignUpForm form) {
 		
+		//To validate the email from user
+		
+		 UserDetailsEntity user = repository.findByEmail(form.getEmail());
+		
+		 if(user !=null) {
+			 
+			 return false;
+		 }
+		
 		//TODO: Copy data from binding obj to entity obj
 		UserDetailsEntity entity = new UserDetailsEntity();
 		BeanUtils.copyProperties(form,entity);
@@ -52,15 +61,12 @@ public class StudentServiceImpl implements StudentService{
 		String subject = "Please unlock your account |Ashok-IT";
 		StringBuffer body = new StringBuffer("");
 		body.append("Dear User,");
-		body.append("Thank you for registering with Ashok-IT.");
+		body.append("");
+		body.append("<h2>User below temporary password to login</h2>");
 		body.append("Your temporary password is:"+entity.getPassword());
 		body.append("<br/>");
-		body.append("<a href=\"unlock?email="+to+"\">Click here to unlock account</a>");
-		body.append("Please unlock the account by using the temperory password and create password immediately.");
-		body.append("Thank you...");
-		body.append("Regards,");
-		body.append("AshokIT Admin");
-
+		body.append("<a href= \"http://localhost:9192/unlock?email="+to+"\">  Click here to unlock account</a>");
+		
 
 		emailUtils.sendEmail(to,subject,body.toString());
 
@@ -69,7 +75,15 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public String unlockAccount(UnlockForm form) {
-		// TODO Auto-generated method stub
+		//TODO: Unlock account from entered temp password and create new password
+		//and change status as Activate.
+		
+		UserDetailsEntity entity = new UserDetailsEntity();
+		BeanUtils.copyProperties(form,entity);
+		
+		
+		entity.setActiveStatus("UNLOCKED");
+		
 		return null;
 	}
 
