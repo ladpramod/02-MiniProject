@@ -1,5 +1,6 @@
 package com.student.enquiry.admin.controller;
 
+import com.student.enquiry.admin.payloads.LoginForm;
 import com.student.enquiry.admin.payloads.SignUpForm;
 import com.student.enquiry.admin.payloads.UnlockForm;
 import com.student.enquiry.admin.service.StudentService;
@@ -31,9 +32,9 @@ public class UserController {
 		boolean status = studentService.signUp(form);
 
 		if (status){
-			model.addAttribute("succMsg","Account created, please check your registered email...");
+			model.addAttribute("successMsg","Account created, please check your registered email...");
 		}else {
-			model.addAttribute("errMsg","Type unique email id...");
+			model.addAttribute("errorMsg","Type unique email id...");
 		}
 		return "signup";
 	}
@@ -51,9 +52,6 @@ public class UserController {
 	
 	@PostMapping("/unlock")
 	public String unlockUserAccount(@ModelAttribute("unlock)") UnlockForm unlock, Model model) {
-		
-
-
 
 		//validate user entered password and current password should same
 		if (unlock.getNewPwd().equals(unlock.getConfPwd())){
@@ -62,10 +60,10 @@ public class UserController {
 			boolean status = studentService.unlockAccount(unlock);
 
 			if (status){
-				model.addAttribute("succMsg", "Your account unlocked successfully..");
+				model.addAttribute("successMsg", "Your account unlocked successfully..");
 			}else {
 
-				model.addAttribute("errMsg","Given temporary password is incorrect, check email once..");
+				model.addAttribute("errorMsg","Given temporary password is incorrect, check email once..");
 			}
 		}else {
 
@@ -73,13 +71,21 @@ public class UserController {
 			model.addAttribute("errMsg", "New Password and Confirm password must be same");
 		}
 
+		System.out.println(unlock);
+
 		return "unlock";
 	}
 	
 	
 	@GetMapping("/login")
-	public String loginPage() {
-		
+	public String loginPage(Model model) {
+		model.addAttribute("loginForm", new LoginForm());
+		return "login";
+	}
+
+	@PostMapping("/login")
+	public String login(@ModelAttribute("loginForm") LoginForm loginForm, Model model) {
+		System.out.println(loginForm);
 		return "login";
 	}
 
@@ -89,6 +95,5 @@ public class UserController {
 		
 		return "forgotPwd";
 	}
-	
-	
+
 }

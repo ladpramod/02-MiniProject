@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xml:lang="en" xmlns:th="www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Login</title>
@@ -78,29 +78,25 @@ border-bottom-right-radius: .3rem;
 										<h6 class="mt-1 mb-5 pb-1">Learn here & lead anywhere</h6>
 									</div>
 
-									<form>
+									<form th:action="@{/login}" th:object="${loginForm}" th:method="POST">
 										<p style=text-align:center>Please login to your account</p>
 
 										<div class="form-outline mb-4" >
-										<label class="form-label" for="form2Example11">Username</label>
 										<input type="email" id="form2Example11" class="form-control"
-												placeholder="Phone number or email address" /> 
-										
+												placeholder="email" th:action="*{email}"/>
+											<label class="form-label" for="form2Example11">Email</label>
+
 										</div>
 
 										<div class="form-outline mb-4">
-										<label class="form-label"
-												for="form2Example22">Password
-										</label >
-											<input type="password" id="form2Example22"
-												class="form-control" 
-												placeholder="Enter your password" /> 
+										<label class="form-label" for="form2Example22">Password	</label >
+											<input type="password" id="form2Example22" class="form-control"
+												placeholder="password" th:field="*{pwd}" />
 										</div>
 
 										<div class="text-center pt-1 mb-5 pb-1">
-											<a href="dashboard"
-												class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-												type="button">Log in</a>
+											<input type="button" value="Login"
+												class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"/>
 											<a class="text-muted" href="forgot">Forgot password?</a>
 										</div>
 

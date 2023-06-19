@@ -23,12 +23,6 @@ public class StudentServiceImpl implements StudentService{
 	private EmailUtils emailUtils;
 
 	@Override
-	public String login(LoginForm form) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean signUp(SignUpForm form) {
 		
 		//To validate the email from user
@@ -95,6 +89,12 @@ public class StudentServiceImpl implements StudentService{
 			return false;
 		}
 
+	}
+
+	@Override
+	public String login(LoginForm form) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

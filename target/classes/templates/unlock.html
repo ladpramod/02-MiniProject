@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xml:lang="en" xmlns:th="www.thymeleaf.org">
+<html xml:lang="en" xmlns:th="www.thymeleaf.org" th:replace="base::layout(~{::section)">
 <head>
 <meta charset="ISO-8859-1">
 <title>Unlock</title>
@@ -41,7 +41,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#"> <img alt="ashokit"
-				src="images/AshokIT-Logo.jpg" width=100%>
+				src="//images/AshokIT-Logo.jpg" width=100%>
 			</a>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -57,6 +57,8 @@
 			</div>
 		</div>
 	</nav>
+	
+	
 	<!-- Start your project here-->
 
 
@@ -71,25 +73,23 @@
 								<div class="card-body p-md-5 mx-md-4">
 
 									<div class="text-center">
-										<img src="images/AshokIT-Logo.jpg" style="width: 185px;"
+										<img src="//images/AshokIT-Logo.jpg" style="width:185px;"
 											alt="logo">
 										<h4 class="mt-1 mb-5 pb-1">Unlock your account here</h4>
 									</div>
 
-									<p th:text="${succMsg}" class="text-success">
-									<p th:text="${errMsg}" class="text-danger">
+									<p th:text="${successMsg}" class="text-success">
+									<p th:text="${errorMsg}" class="text-danger">
 
 									<form th:action="@{/unlock}" th:object="${unlock}" th:method="POST">
 
 										<div class="form-outline mb-6">
 											<h6>Your Email :<p th:text="${unlock.email}"/> </h6>
 											<input type="hidden" th:field="${unlock.email}"/>
-																			
 										</div>
 
 										<div class="form-outline mb-4">
-										<input type="text" id="form2Example22" 
-												class="form-control" th:field="*{tempPwd}"/> 
+										<input type="password" id="form2Example22" class="form-control" th:field="*{tempPwd}"/>
 										<label class="form-label" for="form2Example22">Temporary Password</label>
 										</div>
 
@@ -106,8 +106,7 @@
 										</div>
 
 										<div class="text-center pt-1 mb-5 pb-1">
-											<input type="submit" value="unlock"
-												class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"/>
+											<input type="submit" value="unlock"	class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"/>
 										</div>
 
 										<div
