@@ -21,7 +21,7 @@ public class UserDetailsEntity {
 	private String name;
 	private String email;
 	private String password;
-	private Integer phone;
+	private Long phone;
 	private String activeStatus;
 	
 	

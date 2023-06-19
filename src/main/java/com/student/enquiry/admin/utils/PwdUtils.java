@@ -1,10 +1,15 @@
 package com.student.enquiry.admin.utils;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 public class PwdUtils {
 
 	
-	public String generateRandomPwd() {
-		
-		return null;
+	public static String generateRandomPwd() {
+
+		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		String pwd = RandomStringUtils.random(6,characters);
+
+		return pwd;
 	}
 }

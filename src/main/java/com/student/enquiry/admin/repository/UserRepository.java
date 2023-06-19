@@ -6,4 +6,5 @@ import com.student.enquiry.admin.entities.UserDetailsEntity;
 
 public interface UserRepository extends JpaRepository<UserDetailsEntity, Integer> {
 
+	public UserDetailsEntity findByEmail(String email);
 }

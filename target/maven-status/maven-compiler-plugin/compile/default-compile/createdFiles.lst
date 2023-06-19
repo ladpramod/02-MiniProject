@@ -7,6 +7,7 @@ com\student\enquiry\admin\controller\IndexController.class
 com\student\enquiry\admin\payloads\UnlockForm.class
 com\student\enquiry\admin\payloads\EnquiryForm.class
 com\student\enquiry\admin\payloads\EnquirySearchCriteria.class
+com\student\enquiry\admin\utils\PwdUtils.class
 com\student\enquiry\admin\service\impl\EnquiryServiceImpl.class
 com\student\enquiry\admin\entities\EnquiryStatusEntity.class
 com\student\enquiry\admin\service\impl\StudentServiceImpl.class
