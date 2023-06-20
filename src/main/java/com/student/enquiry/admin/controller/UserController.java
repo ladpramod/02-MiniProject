@@ -41,11 +41,11 @@ public class UserController {
 
 	@GetMapping("/unlock")
 	public String unlockPage(@RequestParam String email, Model model) {
-		
+
 		UnlockForm unlockFormObj = new UnlockForm();
 		unlockFormObj.setEmail(email);
-		
-		model.addAttribute("unlock",unlockFormObj);
+
+		model.addAttribute("unlock", unlockFormObj);
 		
 		return "unlock";
 	}
@@ -53,6 +53,7 @@ public class UserController {
 	@PostMapping("/unlock")
 	public String unlockUserAccount(@ModelAttribute("unlock)") UnlockForm unlock, Model model) {
 
+		System.out.println(unlock);
 		//validate user entered password and current password should same
 		if (unlock.getNewPwd().equals(unlock.getConfPwd())){
 
@@ -71,8 +72,6 @@ public class UserController {
 			model.addAttribute("errMsg", "New Password and Confirm password must be same");
 		}
 
-		System.out.println(unlock);
-
 		return "unlock";
 	}
 	
@@ -85,7 +84,15 @@ public class UserController {
 
 	@PostMapping("/login")
 	public String login(@ModelAttribute("loginForm") LoginForm loginForm, Model model) {
-		System.out.println(loginForm);
+
+		String status = studentService.login(loginForm);
+
+		if (status.contentEquals("success")){
+			//Redirect to Dashboard controller method and Display Dashboard data
+			return "redirect:/dashboard";
+		}
+		model.addAttribute("errorMsg",status);
+
 		return "login";
 	}
 

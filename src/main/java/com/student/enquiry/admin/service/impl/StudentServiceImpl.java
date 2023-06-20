@@ -57,7 +57,7 @@ public class StudentServiceImpl implements StudentService{
 		body.append("Dear User,");
 		body.append("");
 		body.append("<h2>User below temporary password to login</h2>");
-		body.append("Your temporary password is:"+entity.getPassword());
+		body.append("Your temporary password is:"+tempPwd);
 		body.append("<br/>");
 		body.append("<a href= \"http://localhost:9192/unlock?email="+to+"\">  Click here to unlock account</a>");
 		
@@ -93,8 +93,20 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public String login(LoginForm form) {
-		// TODO Auto-generated method stub
-		return null;
+
+
+		UserDetailsEntity entity = repository.findByEmailAndPassword(form.getEmail(), form.getPassword());
+
+		if(entity==null){
+			return "Invalid credentials";
+		}
+
+
+		if(entity.getActiveStatus().equals("LOCKED")){
+			return "Your Account is Locked";
+		}
+
+		return "success";
 	}
 
 	@Override

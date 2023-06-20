@@ -1,12 +1,15 @@
 package com.student.enquiry.admin.payloads;
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class LoginForm {
 
     private String email;
-    private String pwd;
+    private String password;
 }
